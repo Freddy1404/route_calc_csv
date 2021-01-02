@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.net.URL;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -34,7 +35,7 @@ import net.miginfocom.swing.MigLayout;
 
 public class Routensuche
 {
-	private JFrame                                               routensuche;
+	private JFrame routensuche;
 
 	static HashMap<String, HashMap<String, Tuple<Float, Float>>> db = null;
 
@@ -92,13 +93,14 @@ public class Routensuche
 				
 				String ext = null;
 				String s = f.getName();
-		        int i = s.lastIndexOf('.');
+				int i = s.lastIndexOf('.');
 
-		        if (i > 0 &&  i < s.length() - 1) {
-		            ext = s.substring(i+1).toLowerCase();
-		        }
-		        
-		        return "csv".equals(ext);
+				if (i > 0 &&  i < s.length() - 1)
+				{
+					ext = s.substring(i+1).toLowerCase();
+				}
+				
+				return "csv".equals(ext);
 			}
 		});
 
@@ -129,7 +131,9 @@ public class Routensuche
 				}
 			}
 		});
-		btnDateiffnen.setIcon(new ImageIcon(Routensuche.class.getResource("/javax/swing/plaf/metal/icons/ocean/file.gif")));
+		URL icoOpen = Routensuche.class.getResource("/javax/swing/plaf/metal/icons/ocean/file.gif");
+		if (icoOpen != null)
+			btnDateiffnen.setIcon(new ImageIcon(icoOpen));
 		routensuche.getContentPane().add(btnDateiffnen, "cell 2 0,growx");
 
 		JLabel lblRelationen = new JLabel("Relationen:");
@@ -153,8 +157,8 @@ public class Routensuche
 				}
 			}
 		});
-		btnDateiffnen_1
-				.setIcon(new ImageIcon(Routensuche.class.getResource("/javax/swing/plaf/metal/icons/ocean/file.gif")));
+		if (icoOpen != null)
+			btnDateiffnen_1.setIcon(new ImageIcon(icoOpen));
 		routensuche.getContentPane().add(btnDateiffnen_1, "cell 2 1,growx");
 
 		JSeparator separator = new JSeparator();
@@ -182,8 +186,9 @@ public class Routensuche
 				}
 			}
 		});
-		btnOrdnerffnen.setIcon(
-				new ImageIcon(Routensuche.class.getResource("/javax/swing/plaf/metal/icons/ocean/directory.gif")));
+		URL icoDir = Routensuche.class.getResource("/javax/swing/plaf/metal/icons/ocean/directory.gif");
+		if (icoDir != null)
+			btnOrdnerffnen.setIcon(new ImageIcon(icoDir));
 		routensuche.getContentPane().add(btnOrdnerffnen, "cell 2 3,growx");
 
 		JSeparator separator_1 = new JSeparator();
@@ -205,7 +210,9 @@ public class Routensuche
 				}
 			}
 		});
-		btnBerechnen.setIcon(new ImageIcon(Routensuche.class.getResource("/javax/swing/plaf/metal/icons/ocean/computer.gif")));
+		URL icoComp = Routensuche.class.getResource("/javax/swing/plaf/metal/icons/ocean/computer.gif");
+		if (icoComp != null)
+			btnBerechnen.setIcon(new ImageIcon(icoComp));
 		routensuche.getContentPane().add(btnBerechnen, "cell 2 5,growx");
 	}
 
@@ -317,7 +324,7 @@ public class Routensuche
 		{
 			String[] route = line.split(cvsSplitBy);
 
-//              System.out.println("Route [von=" + route[0] + " , nach=" + route[1] + " , Strecke=" + route[2] + " , Fz NJ=" + route[3] + " , Fz Tag=" + route[4] + "]");
+//			System.out.println("Route [von=" + route[0] + " , nach=" + route[1] + " , Strecke=" + route[2] + " , Fz NJ=" + route[3] + " , Fz Tag=" + route[4] + "]");
 
 			if ("Fz NJ".equals(route[3])) continue;
 
